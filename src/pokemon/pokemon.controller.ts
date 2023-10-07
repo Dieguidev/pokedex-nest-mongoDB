@@ -41,7 +41,6 @@ export class PokemonController {
 
   @Delete(':id')
   remove(@Param('id', ParseMongoIdPipe) id: string) {
-    console.log(id);
 
     return this.pokemonService.remove(id);
   }
