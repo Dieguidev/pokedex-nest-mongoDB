@@ -17,8 +17,10 @@ export class PokemonService {
     private readonly pokemonModel: Model<Pokemon>,
   ) { }
 
+
   async create(createPokemonDto: CreatePokemonDto) {
     createPokemonDto.name = createPokemonDto.name.toLowerCase();
+
     try {
       const pokemon = await this.pokemonModel.create(createPokemonDto);
       return pokemon;
@@ -27,9 +29,11 @@ export class PokemonService {
     }
   }
 
+
   findAll() {
     return `This action returns all pokemon`;
   }
+
 
   async findOne(term: string) {
     let pokemon: Pokemon;
@@ -51,6 +55,7 @@ export class PokemonService {
     return pokemon;
   }
 
+
   async update(term: string, updatePokemonDto: UpdatePokemonDto) {
     const pokemon = await this.findOne(term);
 
@@ -64,8 +69,16 @@ export class PokemonService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pokemon`;
+
+  async remove(id: string) {
+    // const pokemon = await this.findOne(id);
+    // await pokemon.deleteOne();
+    // return {id};
+    // const result = await this.pokemonModel.findByIdAndDelete(id);
+    const result = await this.pokemonModel.deleteOne({ _id: id });
+    if (result.deletedCount === 0)
+      throw new BadRequestException(`Pokemon with id ${id} not found`);
+    return result;
   }
 
 
