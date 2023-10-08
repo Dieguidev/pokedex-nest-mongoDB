@@ -16,8 +16,7 @@ export class PokemonService {
   constructor(
     @InjectModel(Pokemon.name)
     private readonly pokemonModel: Model<Pokemon>,
-  ) { }
-
+  ) {}
 
   async create(createPokemonDto: CreatePokemonDto) {
     createPokemonDto.name = createPokemonDto.name.toLowerCase();
@@ -52,14 +51,15 @@ export class PokemonService {
     }
 
     if (!pokemon)
-      pokemon = await this.pokemonModel.findOne({ name: term.toLowerCase() }).select('-__v');
+      pokemon = await this.pokemonModel
+        .findOne({ name: term.toLowerCase() })
+        .select('-__v');
 
     if (!pokemon)
       throw new NotFoundException(`Pokemon with term ${term} not found`);
 
     return pokemon;
   }
-
 
   async update(term: string, updatePokemonDto: UpdatePokemonDto) {
     const pokemon = await this.findOne(term);
@@ -74,7 +74,6 @@ export class PokemonService {
     }
   }
 
-
   async remove(id: string) {
     // const pokemon = await this.findOne(id);
     // await pokemon.deleteOne();
@@ -85,7 +84,6 @@ export class PokemonService {
       throw new BadRequestException(`Pokemon with id ${id} not found`);
     return result;
   }
-
 
   private handleExceptions(error: any) {
     if (error.code === 11000) {
