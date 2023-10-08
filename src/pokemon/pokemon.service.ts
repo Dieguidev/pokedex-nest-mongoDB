@@ -15,6 +15,8 @@ export class PokemonService {
   constructor(
     @InjectModel(Pokemon.name)
     private readonly pokemonModel: Model<Pokemon>,
+
+
   ) { }
 
 
@@ -28,7 +30,6 @@ export class PokemonService {
       this.handleExceptions(error);
     }
   }
-
 
   findAll() {
     return `This action returns all pokemon`;
