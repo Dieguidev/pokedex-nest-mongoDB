@@ -45,5 +45,8 @@ http://localhost:3000/api/seed
 ```
 docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
 ```
-
+Si ya desplego antes solo realizar
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up -d
+```
 
