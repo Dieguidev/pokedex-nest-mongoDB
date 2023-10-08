@@ -11,7 +11,9 @@ async function bootstrap() {
       whitelist: true,
       // forbidNonWhitelisted manda un error si se envian datos extra
       forbidNonWhitelisted: true,
-    }),
+      transform: true,
+      transformOptions: { enableImplicitConversion: true },
+}),
   );
   await app.listen(3000);
 }
